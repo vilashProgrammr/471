@@ -1,0 +1,46 @@
+<ng-container *ngIf="dailyForecast">
+    <div class="row">
+        <div class="col-5" *ngFor="let forecast of dailyForecast.forecasts">
+            <div class="row">
+                <div class="col text-center font-weight-bold">
+                    <h3>{{forecast.date | date:'HH:mm'}}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <i class="wu wu-black wu-64" [ngClass]="getIconClass(forecast)"></i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center font-weight-bold">
+                    {{forecast.weather[0].main}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    {{forecast.weather[0].description}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center font-weight-bold">
+                    {{convertTemperature(forecast.main.temp_max) | number:'1.0-0'}}&deg;{{temperatureUnits}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    {{convertTemperature(forecast.main.temp_min) | number:'1.0-0'}}&deg;{{temperatureUnits}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    F{{getWindSpeed(forecast)}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    {{getWindDirection(forecast)}}
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

@@ -1,0 +1,25 @@
+<ng-container *ngIf="forecast$ | async as forecast">
+    <!-- row with full-width city name column -->
+    <div class="row">
+        <div class="col">
+            <h1>{{forecast.city.name}}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <app-forecast-detail [dailyForecast]="selectedForecast"></app-forecast-detail>
+        </div>
+    </div>
+
+    <!-- row with column for each day in forecast -->
+    <div class="row">
+        <div class="col" *ngFor="let daily of forecast.dailyForecasts">
+            <div class="row">
+                <div class="col text-center font-weight-bold" [class.selected]="selectedForecast === daily" (click)="selectForecast(daily)">
+                    <h2>{{daily.date | date:'EEEE'}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
