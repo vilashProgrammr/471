@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '5-day-forecast/0', pathMatch: 'full' },
+    { path: '', redirectTo: '5-day-forecast/2643743', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent },
 ];
 
