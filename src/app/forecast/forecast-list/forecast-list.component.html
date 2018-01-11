@@ -8,18 +8,31 @@
 
     <div class="row">
         <div class="col">
-            <app-forecast-detail [dailyForecast]="selectedForecast"></app-forecast-detail>
+            <hr/>
         </div>
     </div>
 
-    <!-- row with column for each day in forecast -->
     <div class="row">
-        <div class="col" *ngFor="let daily of forecast.dailyForecasts">
-            <div class="row">
-                <div class="col text-center font-weight-bold" [class.selected]="selectedForecast === daily" (click)="selectForecast(daily)">
-                    <h2>{{daily.date | date:'EEEE'}}</h2>
-                </div>
-            </div>
+        <div class="col">
+            <ul class="nav nav-pills nav-justified">
+                <li class="nav-item" *ngFor="let daily of forecast.dailyForecasts">
+                    <a class="nav-link" [class.active]="selectedForecast === daily" (click)="selectForecast(daily)">
+                        <h2>{{daily.date | date:'EEEE'}}</h2>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <hr/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <app-forecast-detail [dailyForecast]="selectedForecast"></app-forecast-detail>
         </div>
     </div>
 </ng-container>
