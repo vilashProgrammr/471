@@ -13,3 +13,5 @@ Server-sidfe API access aloows:
 	City/country selection using auto-compl;etwe
 		- this is very static static so could be cached client-side
 		
+	
+Caching was lifted from previous work (Chrome extension) 100% written by me. It also used a WebWorker to impliment lifetime and max items expiration policies.

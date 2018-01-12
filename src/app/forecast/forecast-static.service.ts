@@ -14,4 +14,7 @@ export class ForecastStaticService extends ForecastService {
             map(cf => new ForecastByDay().initializeFromCityForecast(cf))
         );
     }
+    public dispose() {
+        // Nothing to do.
+    }
 }

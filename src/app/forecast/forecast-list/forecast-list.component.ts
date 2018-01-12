@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { switchMap, tap } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { ForecastService } from '../forecast.service';
     templateUrl: './forecast-list.component.html',
     styleUrls: ['./forecast-list.component.scss']
 })
-export class ForecastListComponent implements OnInit {
+export class ForecastListComponent implements OnDestroy, OnInit {
     public forecast$: Observable<ForecastByDay>;
     public selectedForecast: DailyForecast;
 
@@ -24,6 +24,10 @@ export class ForecastListComponent implements OnInit {
             switchMap(params => this.forecastService.getForecast(+params.get('cityId'))),
             tap(forecast => this.selectedForecast = forecast.dailyForecasts[0])
         );
+    }
+
+    ngOnDestroy() {
+        this.forecastService.dispose();
     }
 
     selectForecast(forecast: DailyForecast) {
