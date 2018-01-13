@@ -23,12 +23,12 @@ export class NullObjectCacheAdapter<TKey extends string | string[] | number, TVa
 
     /**
      * Always calls the async fetch function and returns an observable of the returned value.
-     * @param key <TKey> The key of the cache item. Ignored.
-     * @param maxAge: <number> The maximum age in milliseconds. If exceeded a new value will be fetched.
+     * @param _key <TKey> The key of the cache item. Ignored.
+     * @param _maxAge: <number> The maximum age in milliseconds. If exceeded a new value will be fetched. Ignored.
      * @param fetchFn: <() => PromiseLike<TValue>> An async function to fetch the value.
      * @return <Observable<TValue>> An observable of the returned value.
      */
-    get(_key: TKey, maxAge: number, fetchFn: () => Observable<TValue>): Observable<TValue> {
+    get(_key: TKey, _maxAge: number, fetchFn: () => Observable<TValue>): Observable<TValue> {
         return fetchFn();
     }
 

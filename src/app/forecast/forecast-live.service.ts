@@ -26,9 +26,9 @@ export class ForecastLiveService extends ForecastService {
         return this.cacheAdapter.get(
             cityId,
             environment.maxCachedForecastAge,
-            () => this.http
-                .get<CityForecast>(environment.openWeatherMap.apiUrl, { params })
-                .pipe(map(cf => mapToForecastByDay(cf)))
+            () => this.http.get<CityForecast>(environment.openWeatherMap.apiUrl, { params }).pipe(
+                map(cf => mapToForecastByDay(cf))
+            )
         );
     }
 
