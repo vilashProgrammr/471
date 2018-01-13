@@ -9,7 +9,6 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "lint-fix": "tslint -c tslint.json --project tsconfig.json --fix",
     "e2e": "ng e2e"
   },
   "private": true,

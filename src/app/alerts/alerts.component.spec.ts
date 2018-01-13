@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AlertsComponent } from './alerts.component';
+import { AlertsService } from './alerts.service';
 
 describe('AlertsComponent', () => {
   let component: AlertsComponent;
@@ -8,9 +8,10 @@ describe('AlertsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlertsComponent ]
+      declarations: [AlertsComponent],
+      providers: [AlertsService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
