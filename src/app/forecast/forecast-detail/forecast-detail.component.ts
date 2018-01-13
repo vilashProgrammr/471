@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DailyForecast, IntervalForecastEx } from '../forecast-by-day.class';
+import { DailyForecast, IntervalForecastEx } from '../../../models/forecast-by-day';
 
 @Component({
     selector: 'app-forecast-detail',

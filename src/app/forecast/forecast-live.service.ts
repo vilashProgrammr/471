@@ -1,16 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { ICacheAdapter } from '../../lib/caching/cache-adapter';
+import { mapToForecastByDay } from '../../mappers/forecast-by-day-mapper';
 import { CityForecast } from '../../models/city-forecast';
+import { ForecastByDay } from '../../models/forecast-by-day';
 import { FORECAST_CACHE_ADAPTER } from '../../tokens';
-import { ForecastByDay } from './forecast-by-day.class';
 import { ForecastService } from './forecast.service';
-
-const API_KEY = '6d67e9fa583373e16891628f2392a2c1';
-const MAX_CACHE_VALUE_AGE = 1000 * 60 * 10;  // 10 minutes
 
 @Injectable()
 export class ForecastLiveService extends ForecastService {
@@ -22,13 +21,16 @@ export class ForecastLiveService extends ForecastService {
     }
 
     public getForecast(cityId: number): Observable<ForecastByDay> {
+        const params = new HttpParams()
+            .set('id', cityId.toString())
+            .set('APPID', environment.openWeatherMap.apiKey);
         return fromPromise(
             this.cacheAdapter.get(
                 cityId,
-                MAX_CACHE_VALUE_AGE,
+                environment.maxCachedForecastAge,
                 () => this.http
-                    .get<CityForecast>(`http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&APPID=${API_KEY}`)
-                    .pipe(map(cf => new ForecastByDay().initializeFromCityForecast(cf)))
+                    .get<CityForecast>(environment.openWeatherMap.apiUrl, { params })
+                    .pipe(map(cf => mapToForecastByDay(cf)))
                     .toPromise()
             )
         );

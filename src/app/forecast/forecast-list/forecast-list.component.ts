@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { switchMap, tap } from 'rxjs/operators';
-import { DailyForecast, ForecastByDay } from '../forecast-by-day.class';
+import { _throw } from 'rxjs/observable/throw';
+import { catchError, switchMap, tap } from 'rxjs/operators';
+import { DailyForecast, ForecastByDay } from '../../../models/forecast-by-day';
 import { ForecastService } from '../forecast.service';
 
 @Component({
@@ -22,7 +23,11 @@ export class ForecastListComponent implements OnDestroy, OnInit {
     ngOnInit() {
         this.forecast$ = this.route.paramMap.pipe(
             switchMap(params => this.forecastService.getForecast(+params.get('cityId'))),
-            tap(forecast => this.selectedForecast = forecast.dailyForecasts[0])
+            tap(forecast => this.selectedForecast = forecast.dailyForecasts[0]),
+            catchError(err => {
+                console.error('Caught: ' + err);
+                return _throw(err);
+            })
         );
     }
 

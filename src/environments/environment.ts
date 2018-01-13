@@ -4,5 +4,11 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-    production: false
+    production: false,
+    // // maxCachedForecastAge: 1000 * 60 * 10,  // 10 minutes
+    maxCachedForecastAge: 0,
+    openWeatherMap: {
+        apiUrl: 'http://api.openweathermap.org/data/2.5/forecastZZZ',
+        apiKey: '6d67e9fa583373e16891628f2392a2c1'
+    }
 };

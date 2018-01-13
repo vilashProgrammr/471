@@ -3,34 +3,12 @@
 import { Inject, Injectable } from '@angular/core';
 import { DB_FACTORY } from '../../tokens';
 import { ICacheAdapter, ICacheValue } from './cache-adapter';
-import { IndexedDbBase } from './indexed-db-base';
-
-export const DB_NAME = 'baml';
-export const DB_VERSION = 1;
-export const CACHE_NAME = '5-day-city-forecasts';
-export const TIMESTAMP_INDEX_NAME = 'timestamp';
-
-/**
- * Upgrade the database creating stores, indeexes, etc.
- * @param db <IDBDatabase> The database to upgrade
- */
-export function upgradeDb(db: IDBDatabase) {
-    const store = db.createObjectStore(CACHE_NAME);
-    store.createIndex(TIMESTAMP_INDEX_NAME, 'timestamp', { unique: false });    // Secondary index on the timestamp/
-}
+import { CACHE_NAME, IndexedDbCacheBase } from './indexed-db-cache-base';
 
 @Injectable()
-export class IndexedDbCacheAdapter<TKey extends number, TValue> extends IndexedDbBase implements ICacheAdapter<TKey, TValue> {
+export class IndexedDbCacheAdapter<TKey extends number, TValue> extends IndexedDbCacheBase implements ICacheAdapter<TKey, TValue> {
     constructor( @Inject(DB_FACTORY) dbFactory: IDBFactory) {
-        super(dbFactory, DB_NAME, DB_VERSION);
-    }
-
-    /**
-     * Upgrade the database creating stores, indeexes, etc.
-     * @param db <IDBDatabase> The database to upgrade
-     */
-    protected upgradeDb(db: IDBDatabase) {
-        upgradeDb(db);
+        super(dbFactory);
     }
 
     /**
