@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { IndexedDbCacheAdapter } from '../../lib/caching/indexed-db-cache-adapter';
+import { LocalStorageCacheAdapter } from '../../lib/caching/local-storage-cache-adapter';
 import { FORECAST_CACHE_ADAPTER } from '../../tokens';
 import { ForecastDetailComponent } from './forecast-detail/forecast-detail.component';
 import { ForecastListComponent } from './forecast-list/forecast-list.component';
@@ -22,7 +22,7 @@ import { ForecastService } from './forecast.service';
     ],
     providers: [
         { provide: ForecastService, useClass: ForecastLiveService },
-        { provide: FORECAST_CACHE_ADAPTER, useClass: IndexedDbCacheAdapter }
+        { provide: FORECAST_CACHE_ADAPTER, useClass: LocalStorageCacheAdapter }
     ]
 })
 export class ForecastModule { }

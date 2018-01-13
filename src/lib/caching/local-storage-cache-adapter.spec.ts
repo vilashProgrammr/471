@@ -1,25 +1,12 @@
-// // import * as sinon from 'sinon';
-// // import { CACHE_NAME, DB_NAME, DB_VERSION, IndexDbCacheAdapter } from './IndexDbCacheAdapter';
-// // import { IEvictionPolicy } from './ICacheAdapter';
+// // import { LocalStorageCacheAdapter } from './local-storage-cache-adapter';
 
-// // const dbFactory = require('fake-indexeddb') as IDBFactory;
+// // const storageMock = {} as Storage;
 
-// // describe('IndexedDb cache adapter', () => {
-// //     let cacheAdapter: IndexDbCacheAdapter<string[], string>;
+// // describe('LocalStorage cache adapter', () => {
+// //     let cacheAdapter: LocalStorageCacheAdapter<string>;
 
 // //     beforeEach(() => {
-// //         cacheAdapter = new IndexDbCacheAdapter<string[], string>(dbFactory);
-// //     });
-
-// //     afterEach((done) => {
-// //         const openDbRequest = dbFactory.open(DB_NAME, DB_VERSION);
-// //         openDbRequest.onsuccess = () => {
-// //             const db = openDbRequest.result as IDBDatabase;
-// //             const transaction = db.transaction(CACHE_NAME, 'readwrite');
-// //             const store = transaction.objectStore(CACHE_NAME);
-// //             const clearRequest = store.clear();
-// //             clearRequest.onsuccess = () => done();
-// //         };
+// //         cacheAdapter = new LocalStorageCacheAdapter<string>(storageMock);
 // //     });
 
 // //     describe('When calling GET', () => {

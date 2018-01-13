@@ -1,15 +1,17 @@
 // Caching adapter implementation using the Null Object pattern.
 
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 import { ICacheAdapter } from './cache-adapter';
 
 export class NullObjectCacheAdapter<TKey extends string | string[] | number, TValue> implements ICacheAdapter<TKey, TValue> {
     /**
-     * Async function that does nothing and always resolves.
-     * @param key <TKey> The key of the cache item. Ignored.
-     * @return <PromiseLike<void>> Always resolves.
+     * Async function to delete the item from the cache if it exists.
+     * @param key <TKey> The key of the cache item.
+     * @return <Observable<void>> An observable.
      */
-    delete(): PromiseLike<void> {
-        return Promise.resolve();
+    delete(): Observable<void> {
+        return of();
     }
 
     /**
@@ -20,46 +22,32 @@ export class NullObjectCacheAdapter<TKey extends string | string[] | number, TVa
     }
 
     /**
-     * Always calls the async fetch function and resolves with the returned value.
+     * Always calls the async fetch function and returns an observable of the returned value.
      * @param key <TKey> The key of the cache item. Ignored.
      * @param maxAge: <number> The maximum age in milliseconds. If exceeded a new value will be fetched.
      * @param fetchFn: <() => PromiseLike<TValue>> An async function to fetch the value.
-     * @return <PromiseLike<TValue>> Resolves with the result, rejects if an error occurs.
+     * @return <Observable<TValue>> An observable of the returned value.
      */
-    get(_key: TKey, maxAge: number, fetchFn: () => PromiseLike<TValue>): PromiseLike<TValue> {
-        return new Promise<TValue>(async (resolve, reject) => {
-            try {
-                const value = await fetchFn();
-                resolve(value);
-            } catch (err) {
-                reject(err);
-            }
-        });
+    get(_key: TKey, maxAge: number, fetchFn: () => Observable<TValue>): Observable<TValue> {
+        return fetchFn();
     }
 
     /**
-     * Test whether the value is in cache. Always resoves to false.
+     * Test whether the value is in cache. Always returns false.
      * @param key <TKey> The key of the cache item. Ignored
-     * @return <PromiseLike<boolean> Always resolves with false.
+     * @return <Observable<boolean> Always returns false.
      */
-    has(): PromiseLike<boolean> {
-        return Promise.resolve(false);
+    has(): Observable<boolean> {
+        return of(false);
     }
 
     /**
-     * Always calls the async fetch function and resolves with the returned value.
+     * Always calls the async fetch function and returns the value.
      * @param key <TKey> The key of the cache item. Ignored.
-     * @param fetchFn: <() => PromiseLike<TValue>> An async function to fetch the new value.
-     * @return <PromiseLike<TValue>> Resolves with the result, rejects if an error occurrs.
+     * @param fetchFn: <() => Observable<TValue>> An async function to fetch the new value.
+     * @return <Observable<TValue>> An observable of the result.
      */
-    set(_key: TKey, fetchFn: () => PromiseLike<TValue>): PromiseLike<TValue> {
-        return new Promise<TValue>(async (resolve, reject) => {
-            try {
-                const value = await fetchFn();
-                resolve(value);
-            } catch (err) {
-                reject(err);
-            }
-        });
+    set(_key: TKey, fetchFn: () => Observable<TValue>): Observable<TValue> {
+        return fetchFn();
     }
 }
