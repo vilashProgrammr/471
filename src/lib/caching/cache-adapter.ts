@@ -24,18 +24,6 @@ export interface ICacheValue<TValue> {
  */
 export interface ICacheAdapter<TKey extends string | string[] | number, TValue> {
     /**
-     * Async function to delete the item from the cache if it exists.
-     * @param key <TKey> The key of the cache item.
-     * @return <Observable<void>> An observable.
-     */
-    delete(key: TKey): Observable<void>;
-
-    /**
-     * Dispose of resources and tidy-up.
-     */
-    dispose(): void;
-
-    /**
      * Get the value from the cache. If not found, execute the async fetch function, store the value
      * in the cache and return it.
      * @param key <TKey> The key of the cache item.
@@ -44,13 +32,6 @@ export interface ICacheAdapter<TKey extends string | string[] | number, TValue> 
      * @return <Observable<TValue>> An observable of the cached value.
      */
     get(key: TKey, maxAge: number, fetchFn: () => Observable<TValue>): Observable<TValue>;
-
-    /**
-     * Test whether the value is in cache.
-     * @param key <TKey> The key of the cache item.
-     * @return <Observable<boolean> An observable.
-     */
-    has(key: TKey): Observable<boolean>;
 
     /**
      * Upserts the value in the cache with the value returned by the async fetch function .

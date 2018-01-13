@@ -13,15 +13,6 @@ export class LocalStorageCacheAdapter<TValue> implements ICacheAdapter<string, T
     }
 
     /**
-     * Async function to delete the item from the cache if it exists.
-     * @param key <string> The key of the cache item.
-     * @return <Observable<void>> An observable.
-     */
-    delete(key: string): Observable<void> {
-        return of(this.storage.removeItem(key));
-    }
-
-    /**
      * Get the value from the cache. If not found, execute the async fetch function, store the value
      * in the cache and return it.
      * @param key <string> The key of the cache item.
@@ -32,23 +23,16 @@ export class LocalStorageCacheAdapter<TValue> implements ICacheAdapter<string, T
     get(key: string, maxAge: number, fetchFn: () => Observable<TValue>): Observable<TValue> {
         const item = this.storage.getItem(key);
         if (item !== null) {
-            const cacheValue = JSON.parse(item, dateReviver) as ICacheValue<TValue>;
-            if (cacheValue.timestamp + maxAge >= Date.now()) {
-                return of(cacheValue.value);
+            try {
+                const cacheValue = JSON.parse(item, dateReviver) as ICacheValue<TValue>;
+                if (cacheValue.timestamp + maxAge >= Date.now()) {
+                    return of(cacheValue.value);
+                }
+            } catch (_err) {
             }
         }
 
         return this.set(key, fetchFn);
-    }
-
-    /**
-     * Test whether the value is in cache.
-     * @param key <string> The key of the cache item.
-     * @return <Observable<boolean> An observable.
-     */
-    has(key: string): Observable<boolean> {
-        const item = this.storage.getItem(key);
-        return of(item !== undefined);
     }
 
     /**
@@ -64,10 +48,6 @@ export class LocalStorageCacheAdapter<TValue> implements ICacheAdapter<string, T
                 this.storage.setItem(key, JSON.stringify(cacheValue));
             })
         );
-    }
-
-    dispose() {
-        // Nothing to do.
     }
 }
 

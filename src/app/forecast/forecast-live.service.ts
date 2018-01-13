@@ -31,8 +31,4 @@ export class ForecastLiveService extends ForecastService {
             )
         );
     }
-
-    public dispose() {
-        this.cacheAdapter.dispose();
-    }
 }

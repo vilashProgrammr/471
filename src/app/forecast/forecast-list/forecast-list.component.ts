@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { _throw } from 'rxjs/observable/throw';
@@ -13,7 +13,7 @@ import { ForecastService } from '../forecast.service';
     templateUrl: './forecast-list.component.html',
     styleUrls: ['./forecast-list.component.scss']
 })
-export class ForecastListComponent implements OnDestroy, OnInit {
+export class ForecastListComponent implements OnInit {
     public forecast$: Observable<ForecastByDay>;
     public selectedForecast: DailyForecast;
 
@@ -33,10 +33,6 @@ export class ForecastListComponent implements OnDestroy, OnInit {
                 return _throw(err);
             })
         );
-    }
-
-    ngOnDestroy() {
-        this.forecastService.dispose();
     }
 
     selectForecast(forecast: DailyForecast) {
