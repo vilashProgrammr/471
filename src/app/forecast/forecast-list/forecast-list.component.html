@@ -1,7 +1,7 @@
 <ng-container *ngIf="forecast$ | async as forecast">
     <div class="row">
         <div class="col">
-            <h1>{{forecast.city.name}}</h1>
+            <h1 id="cityName">{{forecast.city.name}}</h1>
         </div>
     </div>
 
@@ -16,7 +16,7 @@
             <ul class="nav nav-pills nav-justified">
                 <li class="nav-item" *ngFor="let daily of forecast.dailyForecasts">
                     <a class="nav-link" [class.active]="selectedForecast === daily" (click)="selectForecast(daily)">
-                        <h2>{{daily.date | date:'EEEE'}}</h2>
+                        <h2 class="day-heading">{{daily.date | date:'EEEE'}}</h2>
                     </a>
                 </li>
             </ul>

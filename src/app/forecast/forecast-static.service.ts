@@ -15,7 +15,4 @@ export class ForecastStaticService extends ForecastService {
             map(cf => mapToForecastByDay(cf))
         );
     }
-    public dispose() {
-        // Nothing to do.
-    }
 }
