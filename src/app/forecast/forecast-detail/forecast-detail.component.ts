@@ -7,25 +7,26 @@ import { DailyForecast, IntervalForecastEx } from '../../../models/forecast-by-d
     styleUrls: ['./forecast-detail.component.scss']
 })
 export class ForecastDetailComponent {
-    @Input()
-    public dailyForecast: DailyForecast;
+    @Input() public dailyForecast: DailyForecast;
+
     public units: 'metric' | 'imperial' = 'metric';
 
-    public get temperatureUnits(): string {
-        if (this.units === 'metric') {
-            return 'C';
-        }
-
-        return 'F';
-    }
-
+    /**
+     * Get the display wind speed using the beufort scale.
+     * @param {IntervalForecastEx} forecast The subject interval forecast.
+     * @return {string} The wind speed converted to the beaufort scale.
+     */
     public getWindSpeed(forecast: IntervalForecastEx): string {
-        // Wind speed is m/s. Convert to beaufort scale.
+        // Wind speed is in m/s. Convert to beaufort scale.
         const scale = [0.3, 1.6, 3.4, 5.5, 8.0, 10.8, 13.9, 17.2, 20.8, 24.5, 28.5, 32.7, Number.MAX_VALUE];
-        const speed = forecast.wind.speed;
-        return scale.findIndex(c => speed < c).toString();
+        return 'F' + scale.findIndex(c => forecast.wind.speed < c).toString();
     }
 
+    /**
+     * Get the display wind direction using compass points.
+     * @param {IntervalForecastEx} forecast The subject interval forecast.
+     * @return {string} The wind direction using compass points.
+     */
     public getWindDirection(forecast: IntervalForecastEx): string {
         const deg = forecast.wind.deg;
         if (deg <= 22.5) {
@@ -52,6 +53,11 @@ export class ForecastDetailComponent {
         }
     }
 
+    /**
+     * Convert the temperature from degrees Kelvin to the selected units, Celsius or Fahrenheit.
+     * @param {number} temp The temperature in degrees Kelvin.
+     * @return {number} The converted temperature.
+     */
     convertTemperature(temp: number): number {
         if (this.units === 'metric') {
             return temp - 273.15;
@@ -60,6 +66,23 @@ export class ForecastDetailComponent {
         return temp * 9 / 5 - 459.67;
     }
 
+    /**
+     * Get the display temperature units string for the selected units.
+     * @return {string} The display temperature units string for the selected units.
+     */
+    public get temperatureUnits(): string {
+        if (this.units === 'metric') {
+            return 'C';
+        }
+
+        return 'F';
+    }
+
+    /**
+     * Map the weather icon from the API values to the css class for the icon library (weather-underground-icons).
+     * @param {IntervalForecastEx} forecast The subject interval forecast.
+     * @return {string} The icon css class name.
+     */
     getIconClass(forecast: IntervalForecastEx): string {
         switch (forecast.weather[0].icon) {
             case '01d': // clear

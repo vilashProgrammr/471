@@ -17,6 +17,12 @@ export class ForecastListComponent implements OnInit {
     public forecast$: Observable<ForecastByDay>;
     public selectedForecast: DailyForecast;
 
+    /**
+     * Class constructor.
+     * @param {ActivatedRoute} route The active route.
+     * @param {AlertsService} alertsService The alerts service for displaying alert messages to the user.
+     * @param {ForecastService} forecastService The weather forecast API service.
+     */
     constructor(
         private route: ActivatedRoute,
         private alertsService: AlertsService,
@@ -24,6 +30,12 @@ export class ForecastListComponent implements OnInit {
     ) {
     }
 
+    /**
+     * Angular life-cycle event handler.
+     * Binds to the route params observable. On each change of route params, assigns a new observable
+     * to retrive the forecast from the API service for the cityId extracted from the route params.
+     * It also taps into the returned value to select the first day of the forecast.
+     */
     ngOnInit() {
         this.forecast$ = this.route.paramMap.pipe(
             switchMap(params => this.forecastService.getForecast(+params.get('cityId'))),
@@ -35,10 +47,18 @@ export class ForecastListComponent implements OnInit {
         );
     }
 
+    /**
+     * Set the subject forecast as selected. This is bound to the forecast detaol component.
+     * @param {IntervalForecastEx} forecast The subject interval forecast.
+     */
     selectForecast(forecast: DailyForecast) {
         this.selectedForecast = forecast;
     }
 
+    /**
+     * Handle Http errors thrown by the API service by displaying alert messages to the user.
+     * @param {HttpErrorResponse} err The Http response error thrown by the API service.
+     */
     private apiErrorHandler(err: HttpErrorResponse) {
         switch (err.status) {
             case 400:
