@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCAL_STORAGE } from '../tokens';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AlertsComponent } from './alerts/alerts.component';
 import { AlertsService } from './alerts/alerts.service';
 import { AppComponent } from './app.component';
