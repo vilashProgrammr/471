@@ -1,16 +1,15 @@
 @import './variables';
 @import './mixins';
 
-@import 
-    '~bootstrap/scss/functions',
-    '~bootstrap/scss/variables',
-    '~bootstrap/scss/mixins',
-    '~bootstrap/scss/print',
-    '~bootstrap/scss/reboot',
-    '~bootstrap/scss/type',
-    '~bootstrap/scss/utilities',
-    '~bootstrap/scss/alert',
-    '~bootstrap/scss/grid',
-    '~bootstrap/scss/nav';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/print';
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/type';
+@import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/alert';
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/nav';
 
 @import '~weather-underground-icons/dist/wu-icons-style.min.css'
