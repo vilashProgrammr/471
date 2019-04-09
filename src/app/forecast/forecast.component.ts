@@ -4,4 +4,5 @@ import { Component } from '@angular/core';
     templateUrl: './forecast.component.html'
 })
 export class ForecastComponent {
+    //DJ this is foereeirwejgiwej
 }
