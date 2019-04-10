@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+//dhdhdhdhdhdhhdhdhdhhdhdhdhhdd//#endregion
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
