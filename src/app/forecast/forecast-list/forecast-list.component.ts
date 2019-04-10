@@ -8,6 +8,8 @@ import { DailyForecast, ForecastByDay } from '../../../models/forecast-by-day';
 import { AlertsService } from '../../alerts/alerts.service';
 import { ForecastService } from '../forecast.service';
 
+//THISIS DJ ON LIVE SERVER DJ+6@PROGRAMMR .COM
+
 @Component({
     selector: 'app-forecast-list',
     templateUrl: './forecast-list.component.html',

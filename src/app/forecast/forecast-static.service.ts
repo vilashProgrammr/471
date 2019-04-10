@@ -7,6 +7,7 @@ import { mapToForecastByDay } from '../../mappers/forecast-by-day-mapper';
 import { CityForecast } from '../../models/city-forecast';
 import { ForecastByDay } from '../../models/forecast-by-day';
 import { ForecastService } from './forecast.service';
+//DJ ON LIVE SERVER
 
 @Injectable()
 export class ForecastStaticService extends ForecastService {
