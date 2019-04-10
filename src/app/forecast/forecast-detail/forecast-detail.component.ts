@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { DailyForecast, IntervalForecastEx } from '../../../models/forecast-by-day';
 
+
+//dj@4 IN FORECAST DETAISL
+
 @Component({
     selector: 'app-forecast-detail',
     templateUrl: './forecast-detail.component.html',
