@@ -6,6 +6,8 @@ import { environment } from './environments/environment';
 
 if (environment.production) {
     enableProdMode();
+
+    //just a test to see if diff changes is working
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
