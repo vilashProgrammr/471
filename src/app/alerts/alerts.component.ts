@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
 import { Alert, AlertsService } from './alerts.service';
-
+//DJDJDJDJDJDJDJ
 @Component({
     selector: 'app-alerts',
     templateUrl: './alerts.component.html',
