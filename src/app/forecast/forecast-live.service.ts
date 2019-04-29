@@ -9,7 +9,7 @@ import { CityForecast } from '../../models/city-forecast';
 import { ForecastByDay } from '../../models/forecast-by-day';
 import { FORECAST_CACHE_ADAPTER } from '../../tokens';
 import { ForecastService } from './forecast.service';
-
+//djdj
 @Injectable()
 export class ForecastLiveService extends ForecastService {
     /**
