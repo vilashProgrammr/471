@@ -11,7 +11,7 @@ describe('AlertsComponent', () => {
       declarations: [AlertsComponent],
       providers: [AlertsService]
     })
-      .compileComponents();
+      .compileComponents(); 
   }));
 
   beforeEach(() => {
